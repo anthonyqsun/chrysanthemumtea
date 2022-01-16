@@ -1,0 +1,72 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Receptionist {
+    private Scanner sc;
+    private ArrayList<Appointment> appointments;
+
+    public Receptionist() {
+        this.sc = new Scanner(System.in);
+        this.appointments = new ArrayList<>();
+    }
+
+    public void recept() {
+        System.out.println("hi, are you here to check in or schedule an appointment?");
+        String input = sc.nextLine();
+
+        while (!input.equals("exit")) {
+            handleResponse(input);
+            System.out.println("hi, are you here to check in or schedule an appointment?");
+            input = sc.nextLine();
+        }
+    }
+
+    // user states appt time, check current time, see if times match
+    public void checkInPrompt() {
+        System.out.println("what is your name?");
+        String name = sc.nextLine();
+
+        for (Appointment appointment: appointments) {
+            if (appointment.getName().equals(name)) {
+                if (appointment.isReady()) {
+                    System.out.println("checking you in");
+                    // TODO: send user to tarot card reader
+                    return;
+                } else {
+                    System.out.println("your appointment is not ready yet, please come back in " + appointment.waitTime() + " milliseconds");
+                    return;
+                }
+            }
+        }
+
+        System.out.println("couldn't find your appointment, please make one");
+    }
+
+    public void schedulePrompt() {
+        System.out.println("what is your name?");
+        String name = sc.nextLine();
+
+        // TODO: check if time input is valid
+        System.out.println("what time?");
+        String time = sc.nextLine();
+        appointments.add(new Appointment(name));
+
+        System.out.println("your appointment has been created for " + time);
+    }
+
+
+    public void handleResponse(String input) {
+        input = input.trim();
+        if (input.length() == 0) {
+            System.out.println("please say something");
+        } else if (input.equals("check in")) {
+            checkInPrompt();
+        } else if (input.equals("schedule")) {
+            schedulePrompt();
+        } else {
+            System.out.println("invalid choice");
+        }
+    }
+    
+}
+
