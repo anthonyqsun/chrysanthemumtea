@@ -8,5 +8,11 @@ public class Woo {
     public static void main(String[] args) {
         Receptionist jeff = new Receptionist();
         jeff.recept();
+        TarotReader taro = new TarotReader();
+        Card[] draws= taro.draw(3);
+        for (Card draw : draws){
+          System.out.println(draw);
+        }
     }
+
 }

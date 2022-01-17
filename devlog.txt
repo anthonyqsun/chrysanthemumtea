@@ -51,4 +51,8 @@ ALL :: team flag gets a makeover
 ALL :: work on proposal
 ALL :: work on v0 - MVP for reception phase
 
+2022-01-17
+--------------------------------------------------------------
+ALL :: finalized proposal
+ALL :: finished v0 - MVP for consultation phase
 ==============================================================
