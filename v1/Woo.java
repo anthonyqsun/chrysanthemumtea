@@ -1,11 +1,18 @@
-// chrysanthemum tea: Ryan Lau, Melody Lew, Anthony Sun
+// chrysanthemumtea: Ryan Lau, Melody Lew, Anthony Sun
 // apcs pd6
-// final project
-// tbd
-// time spent: 0.5 hours
+// fp: tarot card readings
+// 2022-01-21f
+// time spent: 2.5 hours
 
 public class Woo {
     public static void main(String[] args) {
-        System.out.println("hello world!");
+        Receptionist jeff = new Receptionist();
+        jeff.recept();
+        TarotReader taro = new TarotReader();
+        Card[] draws= taro.draw(3);
+        for (Card draw : draws){
+          System.out.println(draw);
+        }
     }
+
 }
