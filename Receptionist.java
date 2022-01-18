@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Receptionist {
     private Scanner sc;
     private ArrayList<Appointment> appointments;
+    private boolean checkInStatus;
 
     public Receptionist() {
         this.sc = new Scanner(System.in);
@@ -20,7 +21,7 @@ public class Receptionist {
         System.out.println("hi, are you here to check in or schedule an appointment?");
         String input = sc.nextLine();
 
-        while (!input.equals("exit")) {
+        while (!checkInStatus) {
             handleResponse(input);
             System.out.println("hi, are you here to check in or schedule an appointment?");
             input = sc.nextLine();
@@ -48,7 +49,7 @@ public class Receptionist {
             if (appointment.getName().equals(name)) {
                 if (appointment.isReady()) {
                     System.out.println("checking you in");
-                    // TODO: send user to tarot card reader
+                    checkInStatus = true;
                     return;
                 } else {
                     System.out.println("your appointment is not ready yet, please come back in "
