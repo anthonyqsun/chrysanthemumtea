@@ -1,3 +1,9 @@
+// chrysanthemumtea: Ryan Lau, Melody Lew, Anthony Sun
+// apcs pd6
+// fp: tarot card readings
+// 2022-01-21f
+// time spent: 4.0 hours
+
 public class Card{
   private String name, suit, desc, upright, reversed;
   public  Card(String name, String suit, String desc, String upright, String reversed){

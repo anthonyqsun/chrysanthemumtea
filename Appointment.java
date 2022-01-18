@@ -2,7 +2,7 @@
 // apcs pd6
 // fp: tarot card readings
 // 2022-01-21f
-// time spent: 2.5 hours
+// time spent: 4.0 hours
 
 public class Appointment {
     private long time;
