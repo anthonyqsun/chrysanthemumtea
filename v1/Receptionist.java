@@ -53,7 +53,7 @@ public class Receptionist {
                     return;
                 } else {
                     System.out.println("your appointment is not ready yet, please come back in "
-                            + appointment.waitTime() + " milliseconds");
+                            + appointment.getWaitTime() + " milliseconds");
                     return;
                 }
             }

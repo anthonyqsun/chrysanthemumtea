@@ -6,10 +6,18 @@
 
 public class Appointment {
     private String name;
-    private int seconds;
+    private long seconds;
+    private String time;
+
+    public Appointment(String name) {
+      this.name = name;
+      this.seconds = System.currentTimeMillis() + (1000 * 60 * 5);
+
+    }
 
     public Appointment(String name, String time) {
-        this.seconds = System.currentTimeMillis() + (1000 * 60 * 5);
+        this.time=time;
+        this.seconds = System.currentTimeMillis() + (1000 * 60 * parseTime(time));
         this.name = name;
     }
 
@@ -23,13 +31,15 @@ public class Appointment {
       int seconds = 0;
       int colonIndex;
       for (int i = 0; i < time.length()-1; i++){
-        if (time.substring(i,i+2).equals("pm"))){
+        if (time.substring(i,i+2).equals("pm")){
           seconds+= 12*3600;
         }
         if (time.substring(i,i+1).equals(":")){
           colonIndex = i;
         }
       }
+
+      return seconds;
 
     }
 
@@ -38,12 +48,12 @@ public class Appointment {
     }
 
     public boolean isReady() {
-        return Math.abs(this.time - System.currentTimeMillis()) < (1000 * 60 * 5);
+        return Math.abs(this.seconds * 1000 - System.currentTimeMillis()) < (1000 * 60 * 5);
     }
 
     // TODO: make it return something a human would understand
-    public long waitTime() {
-        return this.time - System.currentTimeMillis();
+    public long getWaitTime() {
+        return this.seconds * 1000 - System.currentTimeMillis();
     }
 
     public String toString() {
