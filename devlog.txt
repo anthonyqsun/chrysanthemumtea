@@ -55,4 +55,10 @@ ALL :: work on v0 - MVP for reception phase
 --------------------------------------------------------------
 ALL :: finalized proposal
 ALL :: finished v0 - MVP for consultation phase
+
+2022-01-18
+--------------------------------------------------------------
+Melody Lew && Anthony Sun :: work on v1 - parse time input from user to create Appointment
+Ryan Lau :: work on v1 - finish getDeck() method to turn cardData string into an array of Card classes
+Ryan Lau :: uml diagrams
 ==============================================================
