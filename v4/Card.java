@@ -5,7 +5,7 @@
 // time spent: 5.5 hours
 
 public class Card {
-    private String name, suit, desc, upright, reversed;
+    private String name, suit, desc, upright, reversed, direction;
 
     public Card(String name, String suit, String desc, String upright, String reversed) {
         this.name = name;
@@ -13,6 +13,15 @@ public class Card {
         this.desc = desc;
         this.upright = upright;
         this.reversed = reversed;
+        this.direction = "upright";
+    }
+
+    public void flip() {
+      if (direction.equals("upright")) {
+        direction = "reversed";
+      } else {
+        direction = "upright";
+      }
     }
 
     /*
@@ -38,6 +47,10 @@ public class Card {
     */
 
     public String toString() {
-        return name + " " + suit + " " + desc + " " + upright + " " + reversed;
+      if (direction.equals("upright")) {
+        return name + "\n" + direction + ": " + upright;
+      } else {
+        return name + "\n" + direction + ": " + reversed;
+      }
     }
 }
