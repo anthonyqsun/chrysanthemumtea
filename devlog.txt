@@ -68,4 +68,5 @@ Anthony Sun :: finish v1 - parse time input from user to create Appointment
 Melody Lew :: flow chart
 Ryan Lau && Melody Lew :: v2 - change flow of program
 Ryan Lau && Melody Lew :: v3 - emojiz
+Ryan Lau :: start on v4 - use an interface for speaking classes, create speak/prompt methods to reduce areas for bugs
 ==============================================================
