@@ -8,10 +8,11 @@ public class Appointment {
     private String name;
     private long seconds;
     private String time;
+    private final long MILLIS_IN_DAY = 86_400_000;
 
     public Appointment(String name) {
       this.name = name;
-      this.seconds = System.currentTimeMillis() + (1000 * 60 * 5);
+      this.seconds = System.currentTimeMillis() + (1000 * 60 * 1);
 
     }
 
@@ -27,9 +28,9 @@ public class Appointment {
     //     this.name = name;
     // }
 
-    public int parseTime(String time){
+    public long parseTime(String time){
       int seconds = 0;
-      int colonIndex;
+      int colonIndex=-1; // TODO: make sure only HH:MM is taken in;
       for (int i = 0; i < time.length()-1; i++){
         if (time.substring(i,i+2).equals("pm")){
           seconds+= 12*3600;
@@ -39,7 +40,14 @@ public class Appointment {
         }
       }
 
-      return seconds;
+      int hours = Integer.parseInt(time.substring(0,colonIndex));
+      int minutes = Integer.parseInt(time.substring(colonIndex+1, colonIndex+3));
+
+      seconds += hours * 3600 + minutes * 60;
+
+      System.out.println("asdf"+seconds);
+      System.out.println((System.currentTimeMillis() % MILLIS_IN_DAY) / 1000);
+      return seconds - (System.currentTimeMillis() % MILLIS_IN_DAY) / 1000; // can only handle current day scheduling
 
     }
 
