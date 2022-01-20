@@ -2,17 +2,16 @@
 // apcs pd6
 // fp: tarot card readings
 // 2022-01-21f
-// time spent: 4.0 hours
+// time spent: 8.0 hours
 
 public class Woo {
+    private static Receptionist jeff = new Receptionist();
+    private static TarotReader taro = new TarotReader();
+
     public static void main(String[] args) {
-        Receptionist jeff = new Receptionist();
-        jeff.recept();
-        TarotReader taro = new TarotReader();
-        Card[] draws= taro.draw(3);
-        for (Card draw : draws){
-          System.out.println(draw);
+        while (true) {
+          Appointment checkInApp = jeff.recept();
+          taro.consult(checkInApp);
         }
     }
-
 }

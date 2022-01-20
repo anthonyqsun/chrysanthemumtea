@@ -2,7 +2,7 @@
 // apcs pd6
 // fp: tarot card readings
 // 2022-01-21f
-// time spent: 5.5 hours
+// time spent: 8.0 hours
 
 public class TarotReader {
     private Card[] deck = new Card[78];

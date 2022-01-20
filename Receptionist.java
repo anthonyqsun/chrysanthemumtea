@@ -2,7 +2,7 @@
 // apcs pd6
 // fp: tarot card readings
 // 2022-01-21f
-// time spent: 4.0 hours
+// time spent: 8.0 hours
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -10,66 +10,78 @@ import java.util.ArrayList;
 public class Receptionist {
     private Scanner sc;
     private ArrayList<Appointment> appointments;
+    private boolean checkInStatus;
+    private Appointment checkInApp;
 
     public Receptionist() {
         this.sc = new Scanner(System.in);
         this.appointments = new ArrayList<Appointment>();
     }
 
-    public void recept() {
-        System.out.println("hi, are you here to check in or schedule an appointment?");
+    public Appointment recept() {
+        System.out.print("🐧: hi, are you here to check in or schedule an appointment?\n👤: ");
         String input = sc.nextLine();
 
-        while (!input.equals("exit")) {
+        while (true) {
             handleResponse(input);
-            System.out.println("hi, are you here to check in or schedule an appointment?");
+
+            if (checkInStatus == true) {
+              break;
+            }
+
+            System.out.print("🐧: hi, are you here to check in or schedule an appointment?\n👤: ");
             input = sc.nextLine();
         }
+
+        checkInStatus = false;
+        return checkInApp;
     }
+
 
     public void handleResponse(String input) {
         input = input.trim();
         if (input.length() == 0) {
-            System.out.println("please say something");
+            System.out.print("🐧: please say something\n👤: ");
         } else if (input.equals("check in")) {
             checkInPrompt();
         } else if (input.equals("schedule")) {
             schedulePrompt();
         } else {
-            System.out.println("invalid choice");
+            System.out.print("🐧: invalid choice");
         }
     }
 
     public void checkInPrompt() {
-        System.out.println("what is your name?");
+        System.out.print("🐧: what is your name?\n👤: ");
         String name = sc.nextLine();
 
         for (Appointment appointment : appointments) {
             if (appointment.getName().equals(name)) {
                 if (appointment.isReady()) {
-                    System.out.println("checking you in");
-                    // TODO: send user to tarot card reader
+                    System.out.println("🐧: checking you in");
+                    checkInStatus = true;
+                    checkInApp = appointment;
                     return;
                 } else {
-                    System.out.println("your appointment is not ready yet, please come back in "
-                            + appointment.waitTime() + " milliseconds");
+                    System.out.println("🐧: your appointment is not ready yet, please come back in "
+                            + appointment.getWaitTime() + " milliseconds");
                     return;
                 }
             }
         }
 
-        System.out.println("couldn't find your appointment, please make one");
+        System.out.print("🐧: couldn't find your appointment, please make one\n👤: ");
     }
 
     public void schedulePrompt() {
-        System.out.println("what is your name?");
+        System.out.print("🐧: what is your name?\n👤: ");
         String name = sc.nextLine();
 
         // TODO: check if time input is valid
-        System.out.println("what time?");
+        System.out.print("🐧: what time?\n👤: ");
         String time = sc.nextLine();
-        appointments.add(new Appointment(name));
+        appointments.add(new Appointment(name, time));
 
-        System.out.println("your appointment has been created for " + time);
+        System.out.println("🐧: your appointment has been created for " + time);
     }
 }
