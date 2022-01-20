@@ -12,11 +12,36 @@ public class Appointment {
 
     public Appointment(String name, String time) {
         this.time = time;
-        this.millisSinceMidnight = parseTimeEST(time);
+        this.millisSinceMidnight = parseTimeUTC(convertToUTC(time));
         this.name = name;
     }
 
-    public long parseTimeEST(String time) { // returns appt time in millis since epoch
+    public String convertToUTC(String time) {
+        boolean pm=false;
+        int colonIndex = -1;
+        for (int i = 0; i < time.length() - 1; i++) {
+            if (time.substring(i, i + 2).equals("pm")) {
+                pm=true;
+            }
+            if (time.substring(i, i + 1).equals(":")) {
+                colonIndex = i;
+            }
+        }
+
+        int hours = Integer.parseInt(time.substring(0,colonIndex));
+        if (hours == 12) {
+            hours = 0;
+        }
+        if (hours+5 >= 12 && !pm) {
+            System.out.println(hours+5-12+":"+time.substring(colonIndex+1, colonIndex+3) + " pm");
+            return hours+5-12+":"+time.substring(colonIndex+1, colonIndex+3) + " pm"; //strips to HH+MM and appends pm
+        }
+        System.out.println(hours+5+":"+time.substring(colonIndex+1, colonIndex+3)+ time.substring(colonIndex+3));
+        return hours+5+":"+time.substring(colonIndex+1, colonIndex+3) + time.substring(colonIndex+3);
+
+    }
+
+    public long parseTimeUTC(String time) { // returns appt time in millis since epoch
         int seconds = 0;
         int colonIndex = -1;
 
@@ -36,7 +61,6 @@ public class Appointment {
             hours = 0;
         }
 
-        hours = hours - 24 + 5; // UTC is 5 hours ahead of EST
         int minutes = Integer.parseInt(time.substring(colonIndex + 1, colonIndex + 3));
 
         seconds += hours * 3600 + minutes * 60;

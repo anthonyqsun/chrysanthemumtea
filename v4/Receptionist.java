@@ -71,7 +71,7 @@ public class Receptionist implements Speaker {
                     return;
                 } else {
                     say("your appointment is not ready yet, please come back in "
-                            + appointment.getWaitTime() / 1000 + " seconds");
+                            + appointment.getWaitTime()/1000/60 +1 + " minute(s)");
                     return;
                 }
             }
