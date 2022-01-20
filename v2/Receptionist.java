@@ -80,7 +80,7 @@ public class Receptionist {
         // TODO: check if time input is valid
         System.out.println("what time?");
         String time = sc.nextLine();
-        appointments.add(new Appointment(name));
+        appointments.add(new Appointment(name, time));
 
         System.out.println("your appointment has been created for " + time);
     }

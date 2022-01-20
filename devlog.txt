@@ -61,4 +61,11 @@ ALL :: finished v0 - MVP for consultation phase
 Melody Lew && Anthony Sun :: work on v1 - parse time input from user to create Appointment
 Ryan Lau :: work on v1 - finish getDeck() method to turn cardData string into an array of Card classes
 Ryan Lau :: uml diagrams
+
+2022-01-19
+--------------------------------------------------------------
+Anthony Sun :: finish v1 - parse time input from user to create Appointment
+Melody Lew :: flow chart
+Ryan Lau && Melody Lew :: v2 - change flow of program
+Ryan Lau && Melody Lew :: v3 - emojiz
 ==============================================================

@@ -1,6 +1,6 @@
 public class Tester {
     public static void main(String[] args) {
-        Appointment app = new Appointment("a");
-        System.out.println(app.parseTime("12:34 pm"));
+        Appointment app = new Appointment("a", "8:40 pm");
+        System.out.println("waittime: " + app.getWaitTime());
     }
 }

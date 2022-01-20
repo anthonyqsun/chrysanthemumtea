@@ -47,7 +47,7 @@ public class Receptionist {
         } else if (input.equals("schedule")) {
             schedulePrompt();
         } else {
-            System.out.print("🐧: invalid choice\n👤: ");
+            System.out.print("🐧: invalid choice");
         }
     }
 
@@ -63,8 +63,8 @@ public class Receptionist {
                     checkInApp = appointment;
                     return;
                 } else {
-                  // MAKE SURE TO REVERT THIS LINE
-                    System.out.print("🐧: your appointment is not ready yet, please come back later\n👤: ");
+                    System.out.println("🐧: your appointment is not ready yet, please come back in "
+                            + appointment.getWaitTime() + " milliseconds");
                     return;
                 }
             }
@@ -80,7 +80,7 @@ public class Receptionist {
         // TODO: check if time input is valid
         System.out.print("🐧: what time?\n👤: ");
         String time = sc.nextLine();
-        appointments.add(new Appointment(name));
+        appointments.add(new Appointment(name, time));
 
         System.out.println("🐧: your appointment has been created for " + time);
     }
