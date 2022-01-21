@@ -69,4 +69,10 @@ Melody Lew :: flow chart
 Ryan Lau && Melody Lew :: v2 - change flow of program
 Ryan Lau && Melody Lew :: v3 - emojiz
 Ryan Lau :: start on v4 - use an interface for speaking classes, create speak/prompt methods to reduce areas for bugs
+
+2022-01-20
+--------------------------------------------------------------
+Anthony Sun :: flow chart v2
+Anthony Sun :: v4 - work on parsing time
+Ryan Lau && Melody Lew :: v4 - work on TarotReader.consult()
 ==============================================================
