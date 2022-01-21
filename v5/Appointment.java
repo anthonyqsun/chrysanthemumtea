@@ -1,54 +1,31 @@
-// chrysanthemumtea: Ryan Lau, Melody Lew, Anthony Sun
-// apcs pd6
-// fp: tarot card readings
-// 2022-01-21f
-// time spent: 5.5 hours
-
 public class Appointment {
-    private String name;
-    private long millisSinceMidnight;
-    private String time;
+    // private final long MILLIS_TO_2022 = Long.parseLong("1640995200000");
     private final long MILLIS_IN_DAY = 86_400_000;
+    private String name;
+    private int[] time;
+
+    public Appointment(String name) {
+        this.name = name;
+        this.time = parseTime("11:59 pm");
+    }
 
     public Appointment(String name, String time) {
-        this.time = time;
-        this.millisSinceMidnight = parseTimeUTC(convertToUTC(time));
-        this.name = name;
+        this(name);
+        this.time = parseTime(time);
     }
 
-    public String convertToUTC(String time) {
-        boolean pm=false;
-        int colonIndex = -1;
-        for (int i = 0; i < time.length() - 1; i++) {
-            if (time.substring(i, i + 2).equals("pm")) {
-                pm=true;
-            }
-            if (time.substring(i, i + 1).equals(":")) {
-                colonIndex = i;
-            }
-        }
-
-        int hours = Integer.parseInt(time.substring(0,colonIndex));
-        if (hours == 12) {
-            hours = 0;
-        }
-        if (hours+5 >= 12 && !pm) {
-            System.out.println(hours+5-12+":"+time.substring(colonIndex+1, colonIndex+3) + " pm");
-            return hours+5-12+":"+time.substring(colonIndex+1, colonIndex+3) + " pm"; //strips to HH+MM and appends pm
-        }
-        System.out.println(hours+5+":"+time.substring(colonIndex+1, colonIndex+3)+ time.substring(colonIndex+3));
-        return hours+5+":"+time.substring(colonIndex+1, colonIndex+3) + time.substring(colonIndex+3);
-
+    private long currentTime() {
+        return (System.currentTimeMillis()-18_000_000) % MILLIS_IN_DAY;
     }
 
-    public long parseTimeUTC(String time) { // returns appt time in millis since epoch
-        int seconds = 0;
+    private int[] parseTime(String time) {
         int colonIndex = -1;
+        int hours = 0;
+        int minutes;
 
-        // TODO: make sure only HH:MM is taken in;
         for (int i = 0; i < time.length() - 1; i++) {
             if (time.substring(i, i + 2).equals("pm")) {
-                seconds += 12 * 60 * 60;
+                hours = 12;
             }
 
             if (time.substring(i, i + 1).equals(":")) {
@@ -56,32 +33,26 @@ public class Appointment {
             }
         }
 
-        int hours = Integer.parseInt(time.substring(0, colonIndex));
-        if (hours == 12) {
-            hours = 0;
+        int stringHrs = Integer.parseInt(time.substring(0, colonIndex));
+        if (stringHrs != 12) {
+            hours += stringHrs;
         }
-
-        int minutes = Integer.parseInt(time.substring(colonIndex + 1, colonIndex + 3));
-
-        seconds += hours * 3600 + minutes * 60;
-
-        return (long) (System.currentTimeMillis() / MILLIS_IN_DAY) * MILLIS_IN_DAY + seconds * 1000;
+       
+        minutes = Integer.parseInt(time.substring(colonIndex + 1, colonIndex + 3));
+        
+        return new int[] {hours, minutes};
     }
 
-    public String getName() {
-        return this.name;
+    public long getWaitTime() {
+        int seconds = time[0] * 3600 + time[1] * 60;
+        
     }
 
     public boolean isReady() {
-        return getWaitTime() < 0;
+
     }
 
-    // TODO: make it return something a human would understand
-    public long getWaitTime() {
-        return (millisSinceMidnight-System.currentTimeMillis()) % MILLIS_IN_DAY;
-    }
 
-    public String toString() {
-        return name + " has an appt @ " + time;
-    }
+
+
 }
