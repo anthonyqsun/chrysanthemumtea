@@ -13,14 +13,14 @@ public class Card {
         this.desc = desc;
         this.upright = upright;
         this.reversed = reversed;
-        this.direction = "upright";
+        this.direction = "Upright";
     }
 
     public void flip() {
-      if (direction.equals("upright")) {
-        direction = "reversed";
+      if (direction.equals("Upright")) {
+        direction = "Reversed";
       } else {
-        direction = "upright";
+        direction = "Upright";
       }
     }
 
@@ -47,10 +47,10 @@ public class Card {
     */
 
     public String toString() {
-      if (direction.equals("upright")) {
-        return name + "\n" + direction + ": " + upright;
+      if (direction.equals("Upright")) {
+        return name + " " + direction + "\n" + Helpers.wrap(upright, 120);
       } else {
-        return name + "\n" + direction + ": " + reversed;
+        return name + " " + direction + "\n" + Helpers.wrap(reversed, 120);
       }
     }
 }

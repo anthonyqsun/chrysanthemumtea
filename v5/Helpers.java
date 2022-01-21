@@ -16,4 +16,25 @@ public class Helpers {
         splits.add(input);
         return splits;
     }
+
+
+    public static String wrap(String string, int maxLength) {
+        ArrayList<String> words = split(string, " ");
+
+        String wrappedString = "";
+        String curLine = "";
+
+        for (String word : words) {
+            if (curLine.length() + word.length() + 1 < maxLength) {
+                curLine = curLine + word + " ";
+            } else {
+                wrappedString = wrappedString + curLine + "\n";
+                curLine = "";
+            }
+        }
+
+        wrappedString += curLine;
+
+        return wrappedString;
+    }
 }
