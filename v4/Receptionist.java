@@ -68,10 +68,11 @@ public class Receptionist implements Speaker {
                     say("checking you in");
                     checkInStatus = true;
                     checkInApp = appointment;
+                    // TODO: delete the appointment
                     return;
                 } else {
                     say("your appointment is not ready yet, please come back in "
-                            + appointment.getWaitTime()/1000/60 +1 + " minute(s)");
+                            + appointment.getWaitTime()/1000 + " seconds");
                     return;
                 }
             }

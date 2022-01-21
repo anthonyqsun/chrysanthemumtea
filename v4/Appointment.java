@@ -78,7 +78,7 @@ public class Appointment {
 
     // TODO: make it return something a human would understand
     public long getWaitTime() {
-        return millisSinceMidnight-System.currentTimeMillis();
+        return (millisSinceMidnight-System.currentTimeMillis()) % MILLIS_IN_DAY;
     }
 
     public String toString() {

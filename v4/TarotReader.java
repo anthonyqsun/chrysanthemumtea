@@ -45,7 +45,7 @@ public class TarotReader implements Speaker {
             Card temp = deck[i];
 
             if (Math.random() >= .5) {
-              deck[randomIndex].flip();
+                deck[randomIndex].flip();
             }
 
             deck[i] = deck[randomIndex];
@@ -55,21 +55,34 @@ public class TarotReader implements Speaker {
 
     // ask question: future, relationship
     public void consult(Appointment app) {
-        String question = prompt("what questions are on your mind? You may ask about futures, relationships, and energy.");
-        // do stuff here
-        //figure out number of cards drawn for specfiic question
-        Card[] draws;
-        if (question.indexOf("future") >= 0|| (question.indexOf("year")) >= 0){
-          draws = draw(3);
-        }
-        else if (question.indexOf("relationship") >= 0){
-          draws = draw(3);
-        } else {
-          draws = draw(3);
-        }
-        for (int d = 0; d < draws.length; d ++){
-          System.out.println(draws[d]);
+        // blurb
+        say("You can pick from four spreads: Three Card Spread, Seven Card Ellipse, Calendar Spread, Celtic Cross Spread." +
+                "\n\t1. Three Card Spread is for a quick read. You can do a self-reflection (mind, body, spirit) view your relationship with someone (you, the person, the relationship), or look at your timeline (past, present, future)." +
+                "\n\t2. Seven Card Ellipse will read the past, present, and future; give advice; examine your outer surroundings; reveal your hopes and fears; demonstrate your capabilities." +
+                "\n\t3. Celtic Cross Spread displays you, current challenges, basis of the situation, past, present, future, approach, outer surroundings, hopes, fears, capabilities." +
+                "\n\t4. Calendar Spread is to see how you are throughout the year. Each card represents a month of the year. The last card is how the year will be overall.");
+
+        // TODO: make sure this is a valid selection
+        String spread = prompt("which spread do you want to do? [enter a number]");
+        // figure out number of cards drawn for specfiic question
+        String question = prompt("what question is on your mind?");
+
+        int numOfDraws = 0;
+        if (spread.equals("1")) {
+            numOfDraws = 3;
+        } else if (spread.equals("2")) {
+            numOfDraws = 7;
+        } else if (spread.equals("3")) {
+            numOfDraws = 10;
+        } else if (spread.equals("4")) {
+            numOfDraws = 13;
         }
 
+        Card[] draws = draw(numOfDraws);
+
+        for (int i = 0; i < numOfDraws; i++) {
+            say(draws[i].toString());
+            prompt("press enter to go to the next card");
+        }
     }
 }
