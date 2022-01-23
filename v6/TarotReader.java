@@ -29,7 +29,7 @@ public class TarotReader implements Speaker {
     }
 
     // pick 3, 7, 10, 12
-    public Card[] draw(int numOfCards) {
+    private Card[] draw(int numOfCards) {
         shuffle();
         Card[] draws = new Card[numOfCards];
         for (int i = 0; i < numOfCards; i++) {
@@ -38,7 +38,7 @@ public class TarotReader implements Speaker {
         return draws;
     }
 
-    public void shuffle() {
+    private void shuffle() {
         int randomIndex;
         for (int i = deck.length - 1; i > 0; i--) {
             randomIndex = (int) ((i + 1) * Math.random());
