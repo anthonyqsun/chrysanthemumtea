@@ -14,11 +14,11 @@ public class Appointment {
         this.time = parseTime(time);
     }
 
-    public long currentTime() {
-        return (System.currentTimeMillis()-18_000_000) % MILLIS_IN_DAY;
+    private long currentTime() {
+        return (System.currentTimeMillis()-18_000_000) % MILLIS_IN_DAY; // 18 million millis in 5 hours: UTC -> EST
     }
 
-    public int[] parseTime(String time) {
+    private int[] parseTime(String time) {
         int colonIndex = -1;
         int hours = 0;
         int minutes;
@@ -39,7 +39,7 @@ public class Appointment {
         }
        
         minutes = Integer.parseInt(time.substring(colonIndex + 1, colonIndex + 3));
-        
+
         return new int[] {hours, minutes};
     }
 
@@ -49,14 +49,10 @@ public class Appointment {
 
     public long getWaitTime() {
         int seconds = time[0] * 3600 + time[1] * 60;
-        return seconds - currentTime();
+        return seconds * 1000 - currentTime();
     }
 
     public boolean isReady() {
         return getWaitTime() < 0;
     }
-
-
-
-
 }

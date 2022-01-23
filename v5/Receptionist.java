@@ -64,7 +64,10 @@ public class Receptionist implements Speaker {
 
         for (Appointment appointment : appointments) {
             if (appointment.getName().equals(name)) {
-                if (appointment.isReady()) {
+                if (appointment.getWaitTime() < -600000) {
+                    say("it's been ten minutes since you were supposed to arrive. the reader is seeing someone else now, please reschedule");
+                    return;
+                } else if (appointment.isReady()) {
                     say("checking you in");
                     TerminallyIll.wait(1000);
                     TerminallyIll.clearAndReset();

@@ -1,13 +1,10 @@
 public class Tester {
     public static void main(String[] args) {
-        Appointment app = new Appointment("a", "11:00 am");
+        Appointment app = new Appointment("a", "11:00 pm");
 
-        System.out.println(app.currentTime());
-        int[] times = app.parseTime("12:30 am");
+        System.out.println(app.getWaitTime());
+        System.out.println(app.isReady());
 
-        for (int time : times) {
-            System.out.println(time);
-        }
         // System.out.println(app.getName()+": "+app.getWaitTime());
 
         // app = new Appointment("b", "11:00");
