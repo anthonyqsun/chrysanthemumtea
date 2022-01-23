@@ -2,7 +2,7 @@ chrysanthemum tea
 Ryan Lau
 Melody Lew
 Anthony Sun
-pd 6
+pd 06
 ---------------------
 tarot card readings
 
@@ -11,24 +11,47 @@ tarot card readings
 ------------------------------------------
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-wow we so BOSS bc...
+- Parsing the time was a huge obstacle because of the UTC and EST time difference
+(we worked off UTC midnight which is 7pm EST) but we rewrote the code by
+compartmentalizing specific tasks so that when we found an error, only that
+section of the code is compromised.
+- Clearing the screen and having the cursor return to the top left corner of the
+screen was surprisingly an obstacle. However, learning that the lines above and
+to the left of the cursor
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-blah blah pesky bug...
-maybe some of these will move into the Obs.Ovrcm section...
+Our Tarot Card Reader only works if the computer time is in Eastern Standard Time
+and if daylight savings is not in effect. How do we get our Tarot Card Reader
+to work in any time zone?
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-wow! oo!...
+-We can run methods of an object without assigning it to a variable beforehand
+(e.g. new Appointment("tea", "6:00 am").getWaitTime())
+-We can use emojis in terminal!
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-we changed ___ to ___ bc...
+We changed and refactored Appointment.java several times because we weren't sure
+how to handle the time difference between UTC and EST. We did not consider the
+time difference in the first version, but once we did, our code was too narrow
+in functionality to handle the time change. Thus, in the subsequent versions we
+played around with various solutions until we settled on a streamlined version:
+parseTime(), the most complicated part of our code, was broken down to just
+provide the hours and minutes of a given time.
+
+Additionally, the method currentTime() was made to ensure the time zone difference
+was ubiquitous throughout the entire Appointment class.
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-tales of wisdom gained...
+- Tarot Card Reading is random... the question is not necessarily considered while
+drawing the cards. The cards drawn are random -- the user is interpreting the
+meaning of the cards in the context of their question.
+- Notice the patterns in the (incorrect) results your code is producing. This
+helped us realize the time zone difference.
+
 ||||||||||||||||||||||||||||||||||||||||||
 
 
@@ -75,4 +98,21 @@ Ryan Lau :: start on v4 - use an interface for speaking classes, create speak/pr
 Anthony Sun :: flow chart v2
 Anthony Sun :: v4 - work on parsing time
 Ryan Lau && Melody Lew :: v4 - work on TarotReader.consult()
+
+2022-01-21
+--------------------------------------------------------------
+Anthony Sun :: continued on parsing time
+Ryan Lau && Melody Lew :: worked on formatting and wrapping pretexts
+
+2022-01-22
+--------------------------------------------------------------
+Anthony Sun ::  worked on Appointment, validated user inputs, improved NLP for
+prompts
+Melody Lew :: added description to TarotReader
+Ryan Lau :: implemented TerminallyIll aspects
+
+2022-01-23
+--------------------------------------------------------------
+Melody Lew :: devlog
+ALL :: polished our code and removed discrepancies/breakage points
 ==============================================================
