@@ -63,8 +63,8 @@ public class TerminallyIll
   }
 
   public static void clearAndReset() {
-    go(1, 1);
-    System.out.println(CLEAR_SCREEN);
+    System.out.print(CLEAR_SCREEN);
+    System.out.print("\033[H");
   }
 
   // public static void main(String[] args)
