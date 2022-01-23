@@ -24,33 +24,16 @@ public class Card {
       }
     }
 
-    /*
-    public String getName() {
-        return name;
-    }
-
-    public String getSuit() {
-        return suit;
-    }
 
     public String getDesc() {
         return desc;
     }
 
-    public String getUpright() {
-        return upright;
-    }
-
-    public String getReversed() {
-        return reversed;
-    }
-    */
-
     public String toString() {
       if (direction.equals("Upright")) {
-        return name + "\n " + desc + "\n" + direction + "\n" + Helpers.wrap(upright, 120);
+        return "You pull a " + name + " " + direction + "\n" + Helpers.wrap(upright, 120, "🃏: ", "    ");
       } else {
-        return name + "\n " + desc + "\n" + direction + "\n" + Helpers.wrap(reversed, 120);
+        return "You pull a " + name + " " + direction + "\n" + Helpers.wrap(reversed, 120, "🃏: ", "    ");
       }
     }
 }

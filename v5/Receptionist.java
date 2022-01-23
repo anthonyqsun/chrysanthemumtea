@@ -66,6 +66,8 @@ public class Receptionist implements Speaker {
             if (appointment.getName().equals(name)) {
                 if (appointment.isReady()) {
                     say("checking you in");
+                    TerminallyIll.wait(1000);
+                    TerminallyIll.clearAndReset();
                     checkInStatus = true;
                     checkInApp = appointment;
                     // TODO: delete the appointment

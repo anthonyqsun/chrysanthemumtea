@@ -18,18 +18,18 @@ public class Helpers {
     }
 
 
-    public static String wrap(String string, int maxLength) {
+    public static String wrap(String string, int maxLength, String initial_indent, String subsequent_indent) {
         ArrayList<String> words = split(string, " ");
 
         String wrappedString = "";
-        String curLine = "";
+        String curLine = initial_indent;
 
         for (String word : words) {
             if (curLine.length() + word.length() + 1 < maxLength) {
                 curLine = curLine + word + " ";
             } else {
                 wrappedString = wrappedString + curLine + "\n";
-                curLine = "";
+                curLine = subsequent_indent;
             }
         }
 
