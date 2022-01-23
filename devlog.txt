@@ -114,5 +114,5 @@ Ryan Lau :: implemented TerminallyIll aspects
 2022-01-23
 --------------------------------------------------------------
 Melody Lew :: devlog
-ALL :: polished our code and removed discrepancies/breakage points
+ALL :: v7 - polished our code and removed discrepancies/breakage points
 ==============================================================
