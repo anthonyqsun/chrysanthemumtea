@@ -67,27 +67,27 @@ public class TerminallyIll
     System.out.println(CLEAR_SCREEN);
   }
 
-  public static void main(String[] args)
-  {
-    System.out.println(CLEAR_SCREEN);
-    System.out.println(HIDE_CURSOR);
+  // public static void main(String[] args)
+  // {
+  //   System.out.println(CLEAR_SCREEN);
+  //   System.out.println(HIDE_CURSOR);
 
-    //IT'S A SPECTRUM, Y'ALL
-    for(int i = 0; i < 8; i++){
-      for(int j = 0; j < 8; j++){
-        System.out.println(go(i+1,j+1)+color(30+i,40+j) + "#");
-        System.out.println(go(i+1,j+10)+color(30+i,40+j,BRIGHT) + "#");
-        System.out.println(go(i+1,j+19)+color(30+i,40+j,DARK,ITALICS) + "#");
-      }
-    }
+  //   //IT'S A SPECTRUM, Y'ALL
+  //   for(int i = 0; i < 8; i++){
+  //     for(int j = 0; j < 8; j++){
+  //       System.out.println(go(i+1,j+1)+color(30+i,40+j) + "#");
+  //       System.out.println(go(i+1,j+10)+color(30+i,40+j,BRIGHT) + "#");
+  //       System.out.println(go(i+1,j+19)+color(30+i,40+j,DARK,ITALICS) + "#");
+  //     }
+  //   }
 
-    //HOW TO USE FOR SOME PARTS:
-    System.out.println(go(15,20)+color(ITALICS,RED,background(BLUE))+"ITALICS FISH!~~~~");
-    System.out.println(go(20,20)+color(GREEN,background(YELLOW))+"+=+ ^o^ ");
+  //   //HOW TO USE FOR SOME PARTS:
+  //   System.out.println(go(15,20)+color(ITALICS,RED,background(BLUE))+"ITALICS FISH!~~~~");
+  //   System.out.println(go(20,20)+color(GREEN,background(YELLOW))+"+=+ ^o^ ");
 
 
-    System.out.println(RESET);
+  //   System.out.println(RESET);
 
-  }
+  // }
 
 }
