@@ -2,7 +2,7 @@
 // apcs pd6
 // fp: tarot card readings
 // 2022-01-21f
-// time spent: 8.0 hours
+// time spent: 5.5 hours
 
 import java.util.ArrayList;
 
@@ -15,5 +15,26 @@ public class Helpers {
         }
         splits.add(input);
         return splits;
+    }
+
+
+    public static String wrap(String string, int maxLength, String initial_indent, String subsequent_indent) {
+        ArrayList<String> words = split(string, " ");
+
+        String wrappedString = "";
+        String curLine = initial_indent;
+
+        for (String word : words) {
+            if (curLine.length() + word.length() + 1 < maxLength) {
+                curLine = curLine + word + " ";
+            } else {
+                wrappedString = wrappedString + curLine + "\n";
+                curLine = subsequent_indent;
+            }
+        }
+
+        wrappedString += curLine;
+
+        return wrappedString;
     }
 }

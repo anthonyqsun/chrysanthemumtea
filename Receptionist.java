@@ -2,86 +2,145 @@
 // apcs pd6
 // fp: tarot card readings
 // 2022-01-21f
-// time spent: 8.0 hours
+// time spent: 5.5 hours
 
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Receptionist {
+public class Receptionist implements Speaker {
     private Scanner sc;
     private ArrayList<Appointment> appointments;
     private boolean checkInStatus;
     private Appointment checkInApp;
+    private String icon;
 
     public Receptionist() {
         this.sc = new Scanner(System.in);
+        this.icon = "🐧";
         this.appointments = new ArrayList<Appointment>();
     }
 
+    public String prompt(String question) {
+        System.out.println(icon + ": " + question);
+        System.out.print("👤: ");
+        return sc.nextLine();
+    }
+
+    public void say(String statement) {
+        System.out.println(icon + ": " + statement);
+    }
+
     public Appointment recept() {
-        System.out.print("🐧: hi, are you here to check in or schedule an appointment?\n👤: ");
-        String input = sc.nextLine();
+        String answer;
 
-        while (true) {
-            handleResponse(input);
+        // do-while was covered in summer homework; alternatively, this can be built by initializing checkInStatus as true and checking !checkInStatus in a while loop
+        do {
+            answer = prompt("hi, are you here to check in or schedule an appointment?");
+            handleResponse(answer);
 
-            if (checkInStatus == true) {
-              break;
-            }
-
-            System.out.print("🐧: hi, are you here to check in or schedule an appointment?\n👤: ");
-            input = sc.nextLine();
-        }
-
+        } while (!checkInStatus);
         checkInStatus = false;
         return checkInApp;
+
+        // String answer = prompt("hi, are you here to check in or schedule an appointment?");
+
+        // while (true) {
+            
+        //     handleResponse(answer);
+        //     if (checkInStatus == true) {
+        //       break;
+        //     }
+        //     answer = prompt("hi, are you here to check in or schedule an appointment?");
+        // }
     }
 
+    private boolean contains(String input, String target) {
+        for (int i = 0; i < input.length()-target.length()+1; i++) {
+            if (input.substring(i, i+target.length()).equals(target)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    public void handleResponse(String input) {
+    private void handleResponse(String input) {
         input = input.trim();
         if (input.length() == 0) {
-            System.out.print("🐧: please say something\n👤: ");
-        } else if (input.equals("check in")) {
+            say("please say something");
+        } else if (contains(input, "check in")) {
             checkInPrompt();
-        } else if (input.equals("schedule")) {
+        } else if (contains(input, "schedule")) {
             schedulePrompt();
         } else {
-            System.out.print("🐧: invalid choice");
+            say("invalid choice");
         }
     }
 
-    public void checkInPrompt() {
-        System.out.print("🐧: what is your name?\n👤: ");
-        String name = sc.nextLine();
+    private String smartTime(long time) {
+        long seconds = time/1000;
+        long minutes = (long) seconds / 60;
+        long hours = (long) seconds / 3600;
+        String head = "your appointment is not ready yet, please come back in ";
+
+        if (seconds == 1) {
+            return head + seconds + " second";
+        }
+        else if (seconds < 120) {
+            return head + seconds + " seconds";
+        }
+        else if (minutes == 1) {
+            return head + "1 minute (" + seconds + " seconds)";
+        }
+        else if (seconds / 60 < 60) {
+            return head + minutes + " minutes (" + seconds + " seconds)";
+        }
+        else if (hours == 1) {
+            return head + "1 hour (" + minutes + " minutes)";
+        }
+        return head + hours + " hours (" + minutes + " minutes)";
+    }
+
+    private void checkInPrompt() {
+        String name = prompt("what is your name?");
 
         for (Appointment appointment : appointments) {
             if (appointment.getName().equals(name)) {
-                if (appointment.isReady()) {
-                    System.out.println("🐧: checking you in");
+                if (appointment.getWaitTime() < -600000) {
+                    say("it's been ten minutes since you were supposed to arrive. the reader is seeing someone else now, please reschedule");
+                    return;
+                } else if (appointment.isReady()) {
+                    say("checking you in");
+                    TerminallyIll.wait(1000);
+                    TerminallyIll.clearAndReset();
                     checkInStatus = true;
                     checkInApp = appointment;
+                    // TODO: delete the appointment
                     return;
                 } else {
-                    System.out.println("🐧: your appointment is not ready yet, please come back in "
-                            + appointment.getWaitTime() + " milliseconds");
+                    say(smartTime(appointment.getWaitTime()));
                     return;
                 }
             }
         }
 
-        System.out.print("🐧: couldn't find your appointment, please make one\n👤: ");
+        say("couldn't find your appointment, please schedule one");
     }
 
-    public void schedulePrompt() {
-        System.out.print("🐧: what is your name?\n👤: ");
-        String name = sc.nextLine();
+    private void schedulePrompt() {
+        String name = prompt("what is your name?");
 
-        // TODO: check if time input is valid
-        System.out.print("🐧: what time?\n👤: ");
-        String time = sc.nextLine();
-        appointments.add(new Appointment(name, time));
+        String time = prompt("what time?");
 
-        System.out.println("🐧: your appointment has been created for " + time);
+        // screening for valid time
+        if (contains(time, ":") && time.length() > 2) {
+            appointments.add(new Appointment(name, time));
+        }
+        else {
+            System.out.println("please provide a time in X:XX [am/pm] or XX:XX [am/pm] format");
+            schedulePrompt();
+            return; // makes sure say() in this method is only run once
+        }
+
+        say("your appointment has been created for " + time);
     }
 }
