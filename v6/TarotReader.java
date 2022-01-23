@@ -65,11 +65,8 @@ public class TarotReader implements Speaker {
                 Helpers.wrap("3. Celtic Cross Spread displays you, current challenges, basis of the situation, past, present, future, approach, outer surroundings, hopes, fears, capabilities.", 120, "      ", "         ") + "\n" +
                 Helpers.wrap("4. Calendar Spread is to see how you are throughout the year. Each card represents a month of the year. The last card is how the year will be overall.", 120, "      ", "         "));
 
-            // TODO: make sure this is a valid selection
             String spread = prompt("which spread do you want to do? [enter a number]");
             // figure out number of cards drawn for specfiic question
-
-            prompt("what question is on your mind?");
 
             int numOfDraws = 0;
             if (spread.equals("1")) {
@@ -81,6 +78,15 @@ public class TarotReader implements Speaker {
             } else if (spread.equals("4")) {
                 numOfDraws = 13;
             }
+            else {
+                prompt("please provide a valid choice. (press enter to continue) ");
+                TerminallyIll.clearAndReset();
+                consult(app);
+                return;
+            }
+
+            prompt("what question is on your mind?");
+
 
             Card[] draws = draw(numOfDraws);
 
