@@ -48,9 +48,9 @@ public class Card {
 
     public String toString() {
       if (direction.equals("Upright")) {
-        return name + " " + direction + "\n" + Helpers.wrap(upright, 120);
+        return name + "\n " + desc + "\n" + direction + "\n" + Helpers.wrap(upright, 120);
       } else {
-        return name + " " + direction + "\n" + Helpers.wrap(reversed, 120);
+        return name + "\n " + desc + "\n" + direction + "\n" + Helpers.wrap(reversed, 120);
       }
     }
 }
