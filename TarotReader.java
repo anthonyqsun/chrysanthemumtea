@@ -55,13 +55,12 @@ public class TarotReader implements Speaker {
 
     // ask question: future, relationship
     public void consult(Appointment app) {
+        TerminallyIll.clearAndReset();
         say("Hi, " + app.getName() + "!");
 
         String goAgain = "y";
 
         while (goAgain.equals("y") || goAgain.equals("yes")) {
-            TerminallyIll.clearAndReset();
-
             // blurb
             say(Util.wrap("You can pick from four spreads: Three Card Spread, Seven Card Ellipse, Calendar Spread, Celtic Cross Spread.", 80, "", "    ") + "\n" +
                 Util.wrap("1. Three Card Spread is for a quick read. You can do a self-reflection (mind, body, spirit) view your relationship with someone (you, the person, the relationship), or look at your timeline (past, present, future).", 80, "      ", "         ") + "\n" +
@@ -110,8 +109,9 @@ public class TarotReader implements Speaker {
             }
 
             goAgain = prompt("Do you have another question? [yes/no]");
+            TerminallyIll.clearAndReset();
         }
-        say("Thanks for coming by " + app.getName() + "!");
+        say("Thanks for coming by " + app.getName() + "! See you next time!");
         TerminallyIll.wait(1000);
         TerminallyIll.clearAndReset();
     }

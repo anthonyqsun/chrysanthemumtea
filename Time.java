@@ -51,12 +51,17 @@ public class Time {
     }
 
     public String toString() {
+        String minString  = minute + "";
+        if (minute < 10) {
+            minString = "0" + minute;
+        }
+
         if (hour > 12) {
-            return hour - 12 + ":" + minute + " pm";
+            return hour - 12 + ":" + minString + " pm";
         } else if (hour < 12) {
-            return hour + ":" + minute + " am";
+            return hour + ":" + minString + " am";
         } else {
-            return "12:" + minute + " pm";
+            return "12:" + minString + " pm";
         }
     }
 

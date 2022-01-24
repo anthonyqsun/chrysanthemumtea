@@ -9,10 +9,12 @@ public class Woo {
     private static TarotReader taro = new TarotReader();
 
     public static void main(String[] args) {
+        TerminallyIll.clearAndReset();
         while (Util.currentTimeEST() > 21_600_000) { // 6 hours
           Appointment checkInApp = jeff.recept();
           taro.consult(checkInApp);
         }
-        jeff.say("Sorry, we're closed for the night. Please come visit anytime from 6 am to 11:59 pm!");
+        jeff.say("Sorry, we're closed for the night. Please visit anytime from 6 am to 11:59 pm!");
+        jeff.say("Run LateNight.java if you want to enter through the back door...");
     }
 }
