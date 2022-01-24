@@ -2,7 +2,7 @@
 // apcs pd6
 // fp: tarot card readings
 // 2022-01-23m
-// time spent: 15 hours
+// time spent: 18 hours
 
 /**
  * collection of ANSI control codes and other handy lil' tricks for terminal enlivenation

@@ -2,13 +2,13 @@
 // apcs pd6
 // fp: tarot card readings
 // 2022-01-23m
-// time spent: 15 hours
+// time spent: 18 hours
 
 import java.util.ArrayList;
 
 public class CardData {
     public static Card[] getDeck() {
-        ArrayList<String> splitCardData = Helpers.split(cardData, "|");
+        ArrayList<String> splitCardData = Util.split(cardData, "|");
         Card[] deck = new Card[78];
 
         for (int i = 0; i < splitCardData.size(); i = i + 5) {

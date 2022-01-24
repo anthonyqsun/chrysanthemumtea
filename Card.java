@@ -2,7 +2,7 @@
 // apcs pd6
 // fp: tarot card readings
 // 2022-01-23m
-// time spent: 15 hours
+// time spent: 18 hours
 
 public class Card {
     private String name, suit, desc, upright, reversed, direction;
@@ -30,9 +30,9 @@ public class Card {
 
     public String toString() {
       if (direction.equals("Upright")) {
-        return "You pull a " + name + " " + direction + "\n" + Helpers.wrap(upright, 120, "🃏: ", "    ");
+        return "You pull a " + name + " " + direction + "\n" + Util.wrap(upright, 80, "🃏: ", "    ");
       } else {
-        return "You pull a " + name + " " + direction + "\n" + Helpers.wrap(reversed, 120, "🃏: ", "    ");
+        return "You pull a " + name + " " + direction + "\n" + Util.wrap(reversed, 80, "🃏: ", "    ");
       }
     }
 }

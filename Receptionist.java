@@ -2,7 +2,7 @@
 // apcs pd6
 // fp: tarot card readings
 // 2022-01-23m
-// time spent: 15 hours
+// time spent: 18 hours
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class Receptionist implements Speaker {
     public String prompt(String question) {
         say(question);
         System.out.print("👤: ");
-        return sc.nextLine();
+        return sc.nextLine().toLowerCase().trim();
     }
 
     public void say(String statement) {
@@ -58,22 +58,13 @@ public class Receptionist implements Speaker {
         // }
     }
 
-    private boolean contains(String input, String target) {
-        for (int i = 0; i < input.length()-target.length()+1; i++) {
-            if (input.substring(i, i+target.length()).equals(target)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private void handleResponse(String input) {
         input = input.trim();
         if (input.length() == 0) {
             say("Please say something");
-        } else if (contains(input, "check in")) {
+        } else if (Util.contains(input, "check in")) {
             checkInPrompt();
-        } else if (contains(input, "schedule")) {
+        } else if (Util.contains(input, "schedule")) {
             schedulePrompt();
         } else {
             say("Invalid choice");
@@ -112,7 +103,7 @@ public class Receptionist implements Speaker {
             if (appointment.getName().equals(name)) {
                 if (appointment.getWaitTime() < -300000) {
                     appointments.remove(i);
-                    say(Helpers.wrap("It's been over five minutes since you were supposed to arrive. the reader is seeing someone else now, please reschedule", 120, "", "    "));
+                    say(Util.wrap("It's been over five minutes since you were supposed to arrive. the reader is seeing someone else now, please reschedule", 80, "", "    "));
                     return;
                 } else if (appointment.isReady()) {
                     say("Checking you in...");
@@ -141,29 +132,31 @@ public class Receptionist implements Speaker {
                 return;
             }
         }
-
-        String time = prompt("What time?");
-
-        // screening for valid time
-        if (new Appointment(name, time).getWaitTime() < -600000) {
-            say("You cannot schedule an appointment in the past!");
-            return;
-        } else if (contains(time, ":") && time.length() > 2) {
-            appointments.add(new Appointment(name, time));
+        
+        int numErrors = 1;
+        Time time = new Time("");
+        
+        while (numErrors != 0) {
+            time = new Time(prompt("What time?"));
+            ArrayList<String> errors = time.checkErrors();
+            numErrors = errors.size();
+            
+            if (numErrors != 0) {
+                say("Invalid format: " + errors.toString().substring(1, errors.toString().length() - 1));
+                say("Input a time in the format of \"hh:mm [am/pm]\"");
+            } else if (time.getWaitTime() < -600000) {
+                say("You cannot schedule an appointment in the past!");
+                numErrors = 1;
+            }
         }
-        else {
-            say("Please provide a time in X:XX [am/pm] or XX:XX [am/pm] format");
-            schedulePrompt();
-            return; // makes sure say("Your appointment has been...") in this method is only run once
-        }
-
+        appointments.add(new Appointment(name, time));
         say("Your appointment has been created for " + time);
     }
 
     private void aboutPrompt() {
-        String in = prompt("Hey there, I see that you're new here. do you want to learn about how our tarot readings work? [yes/no]");
+        String in = prompt(Util.wrap("Hey there, I see that you're new here. do you want to learn about how our tarot readings work? [yes/no]", 80, "", "    "));
         if (in.equals("yes") || in.equals("y")) {
-            say(Helpers.wrap("Welcome! If you want to learn about your relationship with someone or perhaps what your future entails, you've come to the right place! Just schedule an appointment with us and show up within five minutes to find out what insight the universe has on your question.", 120, "", "    "));
+            say(Util.wrap("Welcome! If you want to learn about your relationship with someone or perhaps what your future entails, you've come to the right place! Just schedule an appointment with us and show up within five minutes to find out what insight the universe has on your question.", 80, "", "    "));
             say("Our working hours are from 6:00 am to 11:59 pm.");
             prompt("Press enter to continue");
             TerminallyIll.clearAndReset();

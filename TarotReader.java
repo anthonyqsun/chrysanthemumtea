@@ -2,7 +2,7 @@
 // apcs pd6
 // fp: tarot card readings
 // 2022-01-23m
-// time spent: 15 hours
+// time spent: 18 hours
 
 import java.util.Scanner;
 
@@ -21,7 +21,7 @@ public class TarotReader implements Speaker {
     public String prompt(String question) {
         say(question);
         System.out.print("👤: ");
-        return sc.nextLine();
+        return sc.nextLine().toLowerCase().trim();
     }
 
     public void say(String statement) {
@@ -63,11 +63,11 @@ public class TarotReader implements Speaker {
             TerminallyIll.clearAndReset();
 
             // blurb
-            say("You can pick from four spreads: Three Card Spread, Seven Card Ellipse, Calendar Spread, Celtic Cross Spread.\n" +
-                Helpers.wrap("1. Three Card Spread is for a quick read. You can do a self-reflection (mind, body, spirit) view your relationship with someone (you, the person, the relationship), or look at your timeline (past, present, future).", 120, "      ", "         ") + "\n" +
-                Helpers.wrap("2. Seven Card Ellipse will read the past, present, and future; give advice; examine your outer surroundings; reveal your hopes and fears; demonstrate your capabilities.", 120, "      ", "         ") + "\n" +
-                Helpers.wrap("3. Celtic Cross Spread displays you, current challenges, basis of the situation, past, present, future, approach, outer surroundings, hopes, fears, capabilities.", 120, "      ", "         ") + "\n" +
-                Helpers.wrap("4. Calendar Spread is to see how you are throughout the year. Each card represents a month of the year. The last card is how the year will be overall.", 120, "      ", "         "));
+            say(Util.wrap("You can pick from four spreads: Three Card Spread, Seven Card Ellipse, Calendar Spread, Celtic Cross Spread.", 80, "", "    ") + "\n" +
+                Util.wrap("1. Three Card Spread is for a quick read. You can do a self-reflection (mind, body, spirit) view your relationship with someone (you, the person, the relationship), or look at your timeline (past, present, future).", 80, "      ", "         ") + "\n" +
+                Util.wrap("2. Seven Card Ellipse will read the past, present, and future; give advice; examine your outer surroundings; reveal your hopes and fears; demonstrate your capabilities.", 80, "      ", "         ") + "\n" +
+                Util.wrap("3. Celtic Cross Spread displays you, current challenges, basis of the situation, past, present, future, approach, outer surroundings, hopes, fears, capabilities.", 80, "      ", "         ") + "\n" +
+                Util.wrap("4. Calendar Spread is to see how you are throughout the year. Each card represents a month of the year. The last card is how the year will be overall.", 80, "      ", "         "));
 
             String spread = prompt("Which spread do you want to do? [enter a number]");
             // figure out number of cards drawn for specfiic question
@@ -98,7 +98,7 @@ public class TarotReader implements Speaker {
                 say(draws[i].toString());
                 String wantDesc = prompt("Do you want the general description of the card? [yes/no]");
                 if (wantDesc.equals("yes") || wantDesc.equals("y")) {
-                    System.out.println(Helpers.wrap(draws[i].getDesc(), 120, "🃏: ", "    "));
+                    System.out.println(Util.wrap(draws[i].getDesc(), 80, "🃏: ", "    "));
                 }
                 if (i == numOfDraws-1) {
                     prompt("Press enter to finish");
@@ -111,6 +111,8 @@ public class TarotReader implements Speaker {
 
             goAgain = prompt("Do you have another question? [yes/no]");
         }
+        say("Thanks for coming by " + app.getName() + "!");
+        TerminallyIll.wait(1000);
         TerminallyIll.clearAndReset();
     }
 }
