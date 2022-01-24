@@ -115,4 +115,6 @@ Ryan Lau :: implemented TerminallyIll aspects
 --------------------------------------------------------------
 Melody Lew :: devlog
 ALL :: v7 - polished our code and removed discrepancies/breakage points
+Anthony Sun && Ryan Lau :: v8 - compartmentalized Appointment functionality into Time class to better validate user time inputs
+Ryan Lau :: v8 - change wrap from 120 to 80 chars
 ==============================================================
